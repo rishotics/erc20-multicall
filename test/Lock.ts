@@ -35,7 +35,7 @@ describe("Lock", function () {
     const Eoa2scw = await ethers.getContractFactory("EOA2ScwMigrator");
     const eoa2scw = await Eoa2scw.deploy();
     
-    // const app1 = eoa2scw.connect(s1).interface.encodeFunctionData('approveToken', [t1.address, rec.address, amount])
+    const app1 = eoa2scw.connect(s1).interface.encodeFunctionData('approveToken', [t1.address, rec.address, amount])
     const tran1 = eoa2scw.connect(s1).interface.encodeFunctionData('sendToken',[t1.address,rec.address, amount])
     console.log(s1.address)
     console.log(`allowance: ${await t1.allowance(s1.address, rec.address)}`)
@@ -50,8 +50,6 @@ describe("Lock", function () {
     // const app2 = eoa2scw.connect(s1).interface.encodeFunctionData('approveToken', [t2.address, rec.address, "1000"])
     // const tran2 = eoa2scw.interface.encodeFunctionData('sendToken',[t2.address, s1.address, rec.address, "1000"])
     
-    
-    const app1 = eoa2scw.approveToken(t1.address, rec.address, amount).encodeABI();
 
     await eoa2scw.multicall([app1])
     console.log(`allowance: ${await t1.allowance(s1.address, rec.address)}`)
